@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Engineering Cheat Sheets</title>
+<meta name="description" content="A collection of one-page cheat sheets and infographics on AI tools and backend engineering.">
+<style>
+  :root {
+    --bg: #f5f4ef;
+    --surface: #ffffff;
+    --surface-2: #f0eee7;
+    --ink: #1b1c20;
+    --ink-2: #474a53;
+    --ink-3: #7b7e88;
+    --line: #e0ddd3;
+    --accent: #2f5bea;
+    --accent-soft: #e3e9fd;
+    --shadow: 0 1px 2px rgba(20,20,30,.05), 0 4px 14px rgba(20,20,30,.05);
+    --shadow-hover: 0 2px 4px rgba(20,20,30,.06), 0 10px 28px rgba(20,20,30,.10);
+    /* Sheet accent palette, referenced by name in SHEETS[].color */
+    --blue: #2f5bea; --purple: #8a4fd6; --green: #0f8a6a; --orange: #c2571a;
+    --teal: #0e7c9a; --red: #b3261e; --gold: #9a7200;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #111216; --surface: #1a1c22; --surface-2: #22252d;
+      --ink: #eceef3; --ink-2: #b3b7c3; --ink-3: #858a98; --line: #2d313b;
+      --accent: #7c9cff; --accent-soft: #222b48;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 4px 14px rgba(0,0,0,.25);
+      --shadow-hover: 0 2px 4px rgba(0,0,0,.35), 0 10px 28px rgba(0,0,0,.4);
+      --blue: #7c9cff; --purple: #b995f5; --green: #4fd1a8; --orange: #f29a62;
+      --teal: #5ac8e6; --red: #f28b82; --gold: #e7bf55;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #111216; --surface: #1a1c22; --surface-2: #22252d;
+    --ink: #eceef3; --ink-2: #b3b7c3; --ink-3: #858a98; --line: #2d313b;
+    --accent: #7c9cff; --accent-soft: #222b48;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 4px 14px rgba(0,0,0,.25);
+    --shadow-hover: 0 2px 4px rgba(0,0,0,.35), 0 10px 28px rgba(0,0,0,.4);
+    --blue: #7c9cff; --purple: #b995f5; --green: #4fd1a8; --orange: #f29a62;
+    --teal: #5ac8e6; --red: #f28b82; --gold: #e7bf55;
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 16px; line-height: 1.5;
+  }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 0 16px; }
+
+  .theme-btn {
+    position: fixed; top: 14px; right: 14px; z-index: 10;
+    background: var(--surface); color: var(--ink-2); border: 1px solid var(--line);
+    border-radius: 999px; padding: 6px 12px; font: inherit; font-size: .8rem; cursor: pointer; box-shadow: var(--shadow);
+  }
+  .theme-btn:hover { color: var(--ink); }
+
+  header { padding: 72px 0 28px; }
+  .kicker { font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+  h1 { font-size: clamp(2rem, 5.5vw, 3.2rem); font-weight: 800; line-height: 1.1; letter-spacing: -0.015em; margin: 0; max-width: 20ch; }
+  .sub { color: var(--ink-2); max-width: 62ch; margin: 14px 0 0; font-size: 1.05rem; }
+
+  .controls { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: 30px 0 8px; }
+  .search {
+    flex: 1 1 260px; min-width: 0; font: inherit; font-size: .95rem; padding: 10px 14px; border-radius: 10px;
+    border: 1px solid var(--line); background: var(--surface); color: var(--ink);
+  }
+  .search:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .count { font-size: .85rem; color: var(--ink-3); white-space: nowrap; }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 4px 0 24px; }
+  .tag-btn {
+    font: inherit; font-size: .78rem; padding: 4px 11px; border-radius: 999px; cursor: pointer;
+    background: var(--surface); color: var(--ink-2); border: 1px solid var(--line);
+  }
+  .tag-btn:hover { color: var(--ink); border-color: var(--ink-3); }
+  .tag-btn[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+
+  .grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); padding-bottom: 20px; }
+  .card {
+    display: flex; flex-direction: column; min-width: 0; text-decoration: none; color: inherit;
+    background: var(--surface); border: 1px solid var(--line); border-radius: 16px; box-shadow: var(--shadow);
+    overflow: hidden; transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+  }
+  .card:hover, .card:focus-visible { transform: translateY(-2px); box-shadow: var(--shadow-hover); border-color: var(--c); }
+  .card:focus-visible { outline: 2px solid var(--c); outline-offset: 2px; }
+  .band {
+    height: 88px; position: relative; background: color-mix(in srgb, var(--c) 14%, var(--surface));
+    display: flex; align-items: flex-end; padding: 0 18px 14px;
+  }
+  .band::after {
+    content: ""; position: absolute; inset: 0;
+    background: radial-gradient(circle at 88% 20%, color-mix(in srgb, var(--c) 35%, transparent) 0, transparent 45%);
+  }
+  .type {
+    position: relative; z-index: 1; font-size: .68rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--c); background: var(--surface); padding: 3px 9px; border-radius: 999px;
+  }
+  .glyph {
+    position: absolute; right: 18px; top: 18px; z-index: 1; font-size: 1.9rem; line-height: 1;
+    font-family: ui-monospace, Menlo, Consolas, monospace; font-weight: 800; color: var(--c); opacity: .9;
+  }
+  .body { padding: 16px 18px 18px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+  .body h2 { margin: 0; font-size: 1.12rem; line-height: 1.25; }
+  .body p { margin: 0; color: var(--ink-2); font-size: .9rem; }
+  .meta { margin-top: auto; padding-top: 10px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+  .chip { font-size: .72rem; background: var(--surface-2); color: var(--ink-2); padding: 2px 8px; border-radius: 999px; }
+  .date { font-size: .75rem; color: var(--ink-3); margin-left: auto; white-space: nowrap; }
+  .new { font-size: .66rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--c); }
+
+  .empty { display: none; text-align: center; color: var(--ink-3); padding: 50px 0; }
+  footer { border-top: 1px solid var(--line); margin-top: 30px; padding: 24px 0 50px; color: var(--ink-3); font-size: .85rem; }
+
+  @media (max-width: 600px) { header { padding-top: 64px; } }
+  @media print { .theme-btn, .controls, .tags { display: none; } body { background: #fff; } .card { box-shadow: none; break-inside: avoid; } }
+</style>
+</head>
+<body>
+<button class="theme-btn" id="themeBtn" type="button" aria-label="Toggle light or dark theme">◐ Theme</button>
+
+<header>
+  <div class="wrap">
+    <div class="kicker">Collection</div>
+    <h1>Engineering cheat sheets</h1>
+    <p class="sub">One-page references and infographics about working with AI as a backend engineer. Every sheet is a single HTML file: it works offline, prints cleanly, and supports light and dark mode.</p>
+
+    <div class="controls">
+      <input class="search" id="q" type="search" placeholder="Search sheets…" aria-label="Search sheets">
+      <span class="count" id="count" aria-live="polite"></span>
+    </div>
+    <div class="tags" id="tags" role="group" aria-label="Filter by tag"></div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="grid" id="grid"></div>
+  <p class="empty" id="empty">No sheets match. Try another word or clear the tag filter.</p>
+  <noscript><p>This index needs JavaScript. The sheets are in the <a href="sheets/">sheets/</a> folder.</p></noscript>
+</main>
+
+<footer>
+  <div class="wrap">Self-contained HTML pages, hosted on GitHub Pages. Last updated <span id="updated"></span>.</div>
+</footer>
+
+<script>
+  /*
+   * SHEET REGISTRY: the only place you need to edit when adding a sheet.
+   * Add one object per sheet. Newest dates sort first.
+   *   file:        path relative to this page, e.g. "sheets/my-sheet.html"
+   *   title:       short card title
+   *   description: one or two sentences
+   *   type:        "Cheat sheet" | "Infographic" | "Guide" | …
+   *   tags:        lowercase strings; used for the filter chips
+   *   color:       one of blue, purple, green, orange, teal, red, gold
+   *   glyph:       1–3 characters shown on the card (e.g. "AI", ">_", "{}")
+   *   date:        "YYYY-MM-DD" (created or last major update)
+   */
+  var SHEETS = [
+    {
+      file: "sheets/claude-code-cheat-sheet.html",
+      title: "Claude Code: every tool and when to use it",
+      description: "Where to run Claude, models and effort levels, permission modes, context control, skills, hooks, MCP, parallel and background work, review commands, principles and workflow recipes.",
+      type: "Cheat sheet",
+      tags: ["claude-code", "ai", "tools", "workflow"],
+      color: "purple",
+      glyph: ">_",
+      date: "2026-09-27"
+    },
+    {
+      file: "sheets/ai-for-senior-backend-engineers.html",
+      title: "How AI helps a senior backend engineer",
+      description: "Productivity and quality gains across the backend lifecycle, before-and-after comparisons, the specify-delegate-verify loop, what to hand off, and risks with guardrails.",
+      type: "Infographic",
+      tags: ["ai", "backend", "productivity", "quality"],
+      color: "blue",
+      glyph: "AI",
+      date: "2026-09-27"
+    }
+  ];
+
+  (function () {
+    var NEW_DAYS = 30;
+    var root = document.documentElement;
+    var grid = document.getElementById('grid'), empty = document.getElementById('empty');
+    var q = document.getElementById('q'), count = document.getElementById('count'), tagsEl = document.getElementById('tags');
+    var activeTag = null;
+
+    // Theme (shared key with every sheet in this repo)
+    try { var t = localStorage.getItem('cheatsheets-theme'); if (t) root.setAttribute('data-theme', t); } catch (e) {}
+    document.getElementById('themeBtn').addEventListener('click', function () {
+      var cur = root.getAttribute('data-theme') ||
+        (window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      var next = cur === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      try { localStorage.setItem('cheatsheets-theme', next); } catch (e) {}
+    });
+
+    var sheets = SHEETS.slice().sort(function (a, b) { return (b.date || '').localeCompare(a.date || ''); });
+
+    function el(tag, cls, text) {
+      var n = document.createElement(tag);
+      if (cls) n.className = cls;
+      if (text != null) n.textContent = text;
+      return n;
+    }
+    function fmtDate(d) {
+      var p = (d || '').split('-');
+      if (p.length !== 3) return d || '';
+      var dt = new Date(+p[0], +p[1] - 1, +p[2]);
+      return dt.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
+    }
+    function isNew(d) {
+      var p = (d || '').split('-');
+      if (p.length !== 3) return false;
+      return (Date.now() - new Date(+p[0], +p[1] - 1, +p[2]).getTime()) / 864e5 <= NEW_DAYS;
+    }
+
+    // Cards
+    sheets.forEach(function (s) {
+      var a = el('a', 'card');
+      a.href = s.file;
+      a.style.setProperty('--c', 'var(--' + (s.color || 'blue') + ')');
+      a.dataset.search = [s.title, s.description, s.type, (s.tags || []).join(' ')].join(' ').toLowerCase();
+      a.dataset.tags = (s.tags || []).join('|');
+
+      var band = el('div', 'band');
+      band.appendChild(el('span', 'type', s.type || 'Sheet'));
+      band.appendChild(el('span', 'glyph', s.glyph || '•'));
+      a.appendChild(band);
+
+      var body = el('div', 'body');
+      body.appendChild(el('h2', null, s.title));
+      body.appendChild(el('p', null, s.description));
+      var meta = el('div', 'meta');
+      (s.tags || []).forEach(function (tg) { meta.appendChild(el('span', 'chip', tg)); });
+      if (isNew(s.date)) meta.appendChild(el('span', 'new', 'New'));
+      meta.appendChild(el('span', 'date', fmtDate(s.date)));
+      body.appendChild(meta);
+      a.appendChild(body);
+      grid.appendChild(a);
+    });
+
+    // Tag chips, most used first
+    var tagCounts = {};
+    sheets.forEach(function (s) { (s.tags || []).forEach(function (tg) { tagCounts[tg] = (tagCounts[tg] || 0) + 1; }); });
+    var tagList = Object.keys(tagCounts).sort(function (a, b) { return tagCounts[b] - tagCounts[a] || a.localeCompare(b); });
+    function tagButton(label, value) {
+      var b = el('button', 'tag-btn', label);
+      b.type = 'button';
+      b.setAttribute('aria-pressed', value === activeTag ? 'true' : 'false');
+      b.addEventListener('click', function () { activeTag = (activeTag === value) ? null : value; renderTags(); apply(); });
+      return b;
+    }
+    function renderTags() {
+      tagsEl.innerHTML = '';
+      tagsEl.appendChild(tagButton('All', null));
+      tagList.forEach(function (tg) { tagsEl.appendChild(tagButton(tg + ' · ' + tagCounts[tg], tg)); });
+    }
+
+    function apply() {
+      var term = q.value.trim().toLowerCase(), shown = 0;
+      Array.prototype.forEach.call(grid.children, function (c) {
+        var ok = (!term || c.dataset.search.indexOf(term) !== -1) &&
+                 (!activeTag || c.dataset.tags.split('|').indexOf(activeTag) !== -1);
+        c.style.display = ok ? '' : 'none';
+        if (ok) shown++;
+      });
+      count.textContent = shown === sheets.length ? sheets.length + (sheets.length === 1 ? ' sheet' : ' sheets')
+                                                  : shown + ' of ' + sheets.length;
+      empty.style.display = shown ? 'none' : 'block';
+    }
+
+    q.addEventListener('input', apply);
+    document.addEventListener('keydown', function (e) {
+      if (e.key === '/' && document.activeElement !== q) { e.preventDefault(); q.focus(); }
+      if (e.key === 'Escape' && document.activeElement === q) { q.value = ''; apply(); q.blur(); }
+    });
+
+    document.getElementById('updated').textContent = sheets.length ? fmtDate(sheets[0].date) : '—';
+    renderTags();
+    apply();
+  })();
+</script>
+</body>
+</html>

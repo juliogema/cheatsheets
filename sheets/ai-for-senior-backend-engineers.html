@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI for Backend Engineers</title>
+<meta name="description" content="How AI boosts productivity and quality of work for a senior backend engineer.">
+<style>
+  :root {
+    --bg: #f6f5f1;
+    --surface: #ffffff;
+    --surface-2: #efede6;
+    --ink: #1c1d21;
+    --ink-2: #4a4c55;
+    --ink-3: #7a7c86;
+    --line: #dedbd1;
+    --accent: #2f5bea;
+    --accent-soft: #e3e9fd;
+    --speed: #0f8a6a;
+    --speed-soft: #dcf3ec;
+    --quality: #8a4fd6;
+    --quality-soft: #efe5fb;
+    --warn: #c2571a;
+    --warn-soft: #fbe9dd;
+    --you: #b8860b;
+    --you-soft: #f8efd5;
+    --shadow: 0 1px 2px rgba(20,20,30,.05), 0 6px 20px rgba(20,20,30,.05);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #121317;
+      --surface: #1b1d23;
+      --surface-2: #23262e;
+      --ink: #eceef3;
+      --ink-2: #b4b8c4;
+      --ink-3: #868b99;
+      --line: #2e323c;
+      --accent: #7c9cff;
+      --accent-soft: #232c4a;
+      --speed: #4fd1a8;
+      --speed-soft: #173a31;
+      --quality: #b995f5;
+      --quality-soft: #2e2445;
+      --warn: #f29a62;
+      --warn-soft: #3d2618;
+      --you: #e7bf55;
+      --you-soft: #3a3019;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 6px 20px rgba(0,0,0,.25);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #121317;
+    --surface: #1b1d23;
+    --surface-2: #23262e;
+    --ink: #eceef3;
+    --ink-2: #b4b8c4;
+    --ink-3: #868b99;
+    --line: #2e323c;
+    --accent: #7c9cff;
+    --accent-soft: #232c4a;
+    --speed: #4fd1a8;
+    --speed-soft: #173a31;
+    --quality: #b995f5;
+    --quality-soft: #2e2445;
+    --warn: #f29a62;
+    --warn-soft: #3d2618;
+    --you: #e7bf55;
+    --you-soft: #3a3019;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 6px 20px rgba(0,0,0,.25);
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.5;
+    font-size: 16px;
+  }
+  code, .mono { font-family: ui-monospace, "SF Mono", "Cascadia Code", Menlo, Consolas, monospace; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 16px; }
+  section { padding: 44px 0; border-top: 1px solid var(--line); }
+  h1, h2, h3 { line-height: 1.15; margin: 0; letter-spacing: -0.01em; }
+  h2 { font-size: clamp(1.5rem, 3.2vw, 2rem); margin-bottom: 6px; }
+  h3 { font-size: 1.05rem; }
+  p { margin: 0; }
+  .kicker {
+    font-size: .75rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 10px;
+  }
+  .lede { color: var(--ink-2); max-width: 64ch; margin-bottom: 28px; }
+
+  /* Theme toggle */
+  .theme-btn {
+    position: fixed; top: 14px; right: 14px; z-index: 10;
+    background: var(--surface); color: var(--ink-2); border: 1px solid var(--line);
+    border-radius: 999px; padding: 6px 12px; font: inherit; font-size: .8rem; cursor: pointer;
+    box-shadow: var(--shadow);
+  }
+
+  .home-link {
+    position: fixed; top: 14px; left: 14px; z-index: 10; text-decoration: none;
+    background: var(--surface); color: var(--ink-2); border: 1px solid var(--line);
+    border-radius: 999px; padding: 6px 12px; font-size: .8rem; box-shadow: var(--shadow);
+  }
+  .home-link:hover, .theme-btn:hover { color: var(--ink); }
+
+  /* Hero */
+  .hero { padding: 72px 0 48px; }
+  .hero h1 { font-size: clamp(2.1rem, 6vw, 3.6rem); font-weight: 800; max-width: 18ch; }
+  .hero h1 em { font-style: normal; color: var(--accent); }
+  .hero .sub { font-size: clamp(1.02rem, 2vw, 1.2rem); color: var(--ink-2); max-width: 60ch; margin-top: 18px; }
+  .equation {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 36px;
+  }
+  .eq-chip {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 14px;
+    padding: 14px 18px; box-shadow: var(--shadow); min-width: 0;
+  }
+  .eq-chip b { display: block; font-size: 1.05rem; }
+  .eq-chip span { font-size: .85rem; color: var(--ink-3); }
+  .eq-chip.you { border-color: var(--you); background: var(--you-soft); }
+  .eq-chip.ai { border-color: var(--accent); background: var(--accent-soft); }
+  .eq-chip.out { border-color: var(--speed); background: var(--speed-soft); }
+  .eq-op { font-size: 1.6rem; font-weight: 300; color: var(--ink-3); }
+
+  /* Two pillars */
+  .pillars { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 18px; }
+  .pillar {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 18px;
+    padding: 24px; box-shadow: var(--shadow); border-top: 5px solid var(--c);
+  }
+  .pillar.speed { --c: var(--speed); --cs: var(--speed-soft); }
+  .pillar.quality { --c: var(--quality); --cs: var(--quality-soft); }
+  .pillar-head { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+  .pillar-icon {
+    width: 44px; height: 44px; border-radius: 12px; background: var(--cs); color: var(--c);
+    display: grid; place-items: center; flex: none;
+  }
+  .pillar-head h3 { font-size: 1.25rem; }
+  .pillar-head p { font-size: .85rem; color: var(--ink-3); }
+  .pillar ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+  .pillar li { display: grid; grid-template-columns: 22px minmax(0,1fr); gap: 10px; align-items: start; }
+  .pillar li::before {
+    content: ""; width: 10px; height: 10px; border-radius: 3px; background: var(--c);
+    margin: 7px 0 0 4px;
+  }
+  .pillar li b { display: block; font-size: .98rem; }
+  .pillar li span { color: var(--ink-2); font-size: .9rem; }
+
+  /* Lifecycle */
+  .flow {
+    display: grid; grid-template-columns: repeat(6, minmax(0,1fr)); gap: 10px; position: relative;
+  }
+  .stage {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 16px;
+    padding: 16px 14px; box-shadow: var(--shadow); position: relative; display: flex; flex-direction: column;
+  }
+  .stage-num {
+    width: 30px; height: 30px; border-radius: 50%; background: var(--accent); color: var(--bg);
+    display: grid; place-items: center; font-weight: 800; font-size: .85rem; margin-bottom: 10px;
+  }
+  .stage h3 { margin-bottom: 8px; }
+  .stage ul { margin: 0; padding-left: 16px; font-size: .84rem; color: var(--ink-2); display: grid; gap: 5px; }
+  .stage .prompt {
+    margin-top: auto; padding-top: 12px; font-size: .74rem; color: var(--ink-3);
+  }
+  .stage .prompt code {
+    display: block; background: var(--surface-2); border-radius: 8px; padding: 8px; margin-top: 6px;
+    color: var(--ink-2); white-space: normal; line-height: 1.4;
+  }
+  .flow-rail {
+    height: 6px; border-radius: 3px; margin: 0 0 14px;
+    background: linear-gradient(90deg, var(--accent), var(--quality), var(--speed));
+    opacity: .8;
+  }
+
+  /* Before / after */
+  .ba { display: grid; gap: 10px; }
+  .ba-row {
+    display: grid; grid-template-columns: 180px minmax(0,1fr) minmax(0,1fr); gap: 10px; align-items: stretch;
+  }
+  .ba-head { font-size: .75rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); padding: 0 4px; }
+  .ba-task { font-weight: 700; padding: 14px 4px; display: flex; align-items: center; }
+  .ba-cell {
+    border-radius: 12px; padding: 12px 14px; font-size: .9rem; border: 1px solid var(--line);
+  }
+  .ba-cell.before { background: var(--surface-2); color: var(--ink-2); }
+  .ba-cell.after { background: var(--speed-soft); border-color: transparent; color: var(--ink); }
+
+  /* Loop */
+  .loop-grid { display: grid; grid-template-columns: minmax(0, 360px) minmax(0,1fr); gap: 32px; align-items: center; }
+  .loop-svg { width: 100%; height: auto; display: block; }
+  .loop-svg .ring { fill: none; stroke: var(--line); stroke-width: 14; }
+  .loop-svg .arc { fill: none; stroke-width: 14; stroke-linecap: round; }
+  .loop-svg .node { fill: var(--surface); stroke-width: 3; }
+  .loop-svg text { fill: var(--ink); font-family: inherit; font-weight: 700; font-size: 15px; }
+  .loop-svg .center-t { fill: var(--ink-3); font-weight: 600; font-size: 12px; letter-spacing: .1em; }
+  .loop-steps { display: grid; gap: 14px; }
+  .loop-step { display: grid; grid-template-columns: 38px minmax(0,1fr); gap: 12px; }
+  .loop-step .dot {
+    width: 38px; height: 38px; border-radius: 10px; display: grid; place-items: center;
+    font-weight: 800; color: var(--bg);
+  }
+  .loop-step p { color: var(--ink-2); font-size: .92rem; }
+  .loop-step .owner { font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+
+  /* Split: you vs AI */
+  .split { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 18px; }
+  .split-col { border-radius: 18px; padding: 22px; }
+  .split-col.ai { background: var(--accent-soft); }
+  .split-col.you { background: var(--you-soft); }
+  .split-col h3 { font-size: 1.15rem; margin-bottom: 12px; }
+  .split-col.ai h3 { color: var(--accent); }
+  .split-col.you h3 { color: var(--you); }
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tag {
+    background: var(--surface); border-radius: 999px; padding: 6px 12px; font-size: .86rem; color: var(--ink);
+    border: 1px solid var(--line);
+  }
+
+  /* Risks */
+  .risks { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 14px; }
+  .risk {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 18px;
+    box-shadow: var(--shadow);
+  }
+  .risk .r { color: var(--warn); font-weight: 700; font-size: .95rem; display: flex; gap: 8px; align-items: center; }
+  .risk .r::before { content: "!"; width: 20px; height: 20px; border-radius: 50%; background: var(--warn-soft); color: var(--warn); display: grid; place-items: center; font-size: .75rem; flex: none; }
+  .risk p { font-size: .88rem; color: var(--ink-2); margin: 6px 0 10px; }
+  .risk .fix { font-size: .86rem; border-top: 1px dashed var(--line); padding-top: 10px; }
+  .risk .fix b { color: var(--speed); }
+
+  /* Prompt anatomy */
+  .anatomy {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 22px; box-shadow: var(--shadow);
+  }
+  .anatomy-line { display: grid; grid-template-columns: 130px minmax(0,1fr); gap: 14px; padding: 10px 0; border-bottom: 1px solid var(--line); }
+  .anatomy-line:last-child { border-bottom: 0; }
+  .anatomy-line .lbl { font-size: .75rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding-top: 3px; }
+  .anatomy-line .txt { font-size: .9rem; color: var(--ink-2); }
+  .anatomy-line .txt code { color: var(--ink); background: var(--surface-2); padding: 1px 6px; border-radius: 5px; font-size: .85em; }
+
+  /* Checklist */
+  .checklist { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 10px 24px; list-style: none; padding: 0; margin: 0; }
+  .checklist li { display: grid; grid-template-columns: 24px minmax(0,1fr); gap: 10px; font-size: .95rem; }
+  .checklist li::before {
+    content: ""; width: 18px; height: 18px; border: 2px solid var(--accent); border-radius: 5px; margin-top: 2px;
+  }
+  .checklist li b { color: var(--ink); }
+  .checklist li span { color: var(--ink-2); }
+
+  footer { padding: 36px 0 60px; border-top: 1px solid var(--line); color: var(--ink-3); font-size: .85rem; }
+  footer .big { font-size: clamp(1.2rem, 3vw, 1.6rem); color: var(--ink); font-weight: 800; margin-bottom: 8px; max-width: 30ch; }
+
+  /* Responsive */
+  @media (max-width: 960px) {
+    .flow { grid-template-columns: repeat(3, minmax(0,1fr)); }
+    .risks { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  }
+  @media (max-width: 720px) {
+    .pillars, .split, .checklist { grid-template-columns: minmax(0,1fr); }
+    .flow { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    .flow-rail { display: none; }
+    .risks { grid-template-columns: minmax(0,1fr); }
+    .loop-grid { grid-template-columns: minmax(0,1fr); }
+    .loop-svg { max-width: 300px; margin: 0 auto; }
+    .ba-row { grid-template-columns: minmax(0,1fr); gap: 6px; }
+    .ba-row.head { display: none; }
+    .ba-task { padding: 12px 0 0; }
+    .ba-cell.before::before { content: "Before: "; font-weight: 700; }
+    .ba-cell.after::before { content: "With AI: "; font-weight: 700; }
+    .anatomy-line { grid-template-columns: minmax(0,1fr); gap: 2px; }
+    .eq-op { display: none; }
+    .equation { display: grid; grid-template-columns: minmax(0,1fr); }
+  }
+  @media (max-width: 420px) {
+    .flow { grid-template-columns: minmax(0,1fr); }
+  }
+  @media print {
+    .theme-btn, .home-link { display: none; }
+    section { break-inside: avoid; }
+    body { background: #fff; }
+  }
+</style>
+</head>
+<body>
+<a class="home-link" href="../index.html">← All sheets</a>
+<button class="theme-btn" id="themeBtn" type="button" aria-label="Toggle light or dark theme">◐ Theme</button>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">Infographic · For senior backend engineers</div>
+    <h1>AI makes you <em>faster</em> and makes your work <em>better</em>.</h1>
+    <p class="sub">Let AI take the typing, the searching and the first draft. That leaves your time for the parts that need experience: architecture, trade-offs, correctness and ownership.</p>
+
+    <div class="equation" role="img" aria-label="Your judgment plus AI leverage equals more output at higher quality">
+      <div class="eq-chip you"><b>Your judgment</b><span>context · taste · accountability</span></div>
+      <div class="eq-op">+</div>
+      <div class="eq-chip ai"><b>AI leverage</b><span>speed · breadth · tireless review</span></div>
+      <div class="eq-op">=</div>
+      <div class="eq-chip out"><b>More shipped, fewer defects</b><span>focus on the hard problems</span></div>
+    </div>
+  </div>
+</header>
+
+<!-- Two pillars -->
+<section>
+  <div class="wrap">
+    <div class="kicker">The two payoffs</div>
+    <h2>Productivity and quality</h2>
+    <p class="lede">Most people think of AI as a speed tool. For a senior engineer, the quality gains can matter more: a reviewer that doesn't get tired, a test writer that looks for edge cases, and a second opinion on every design.</p>
+
+    <div class="pillars">
+      <div class="pillar speed">
+        <div class="pillar-head">
+          <div class="pillar-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z"/></svg>
+          </div>
+          <div><h3>Productivity</h3><p>Ship more in the same hours</p></div>
+        </div>
+        <ul>
+          <li><div><b>Scaffolding and boilerplate</b><span>Handlers, DTOs, gRPC or REST stubs, config wiring and Dockerfiles, written in minutes.</span></div></li>
+          <li><div><b>Codebase navigation</b><span>"Where is the token refresh handled?" gets answered across services without you grepping for 30 minutes.</span></div></li>
+          <li><div><b>Large refactors and migrations</b><span>Library upgrades, API version bumps and lint migrations applied across hundreds of files.</span></div></li>
+          <li><div><b>Debugging help</b><span>Paste the stack trace, logs or pprof output and get ranked hypotheses to test.</span></div></li>
+          <li><div><b>Writing you'd rather skip</b><span>PR descriptions, commit messages, runbooks, ADR drafts and status updates.</span></div></li>
+          <li><div><b>Learning unfamiliar tech</b><span>Get productive in a new queue, database or framework in hours, not days.</span></div></li>
+        </ul>
+      </div>
+
+      <div class="pillar quality">
+        <div class="pillar-head">
+          <div class="pillar-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5l-8-3z"/><path d="m9 12 2 2 4-4"/></svg>
+          </div>
+          <div><h3>Quality</h3><p>Catch more before production does</p></div>
+        </div>
+        <ul>
+          <li><div><b>Edge-case test generation</b><span>Table-driven tests for nil inputs, boundaries, timeouts, retries and partial failures.</span></div></li>
+          <li><div><b>Concurrency review</b><span>Flags data races, goroutine leaks, unclosed channels and missing context cancellation.</span></div></li>
+          <li><div><b>Security review</b><span>Injection, authz gaps, secrets in logs, unsafe deserialization and missing input checks.</span></div></li>
+          <li><div><b>Observability gaps</b><span>Missing spans, unstructured logs, wrong log levels and metrics with high cardinality.</span></div></li>
+          <li><div><b>Design critique</b><span>Stress-tests your design: failure modes, idempotency, back-pressure and data consistency.</span></div></li>
+          <li><div><b>Docs that match the code</b><span>OpenAPI specs, READMEs and comments kept in line with what the code actually does.</span></div></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Lifecycle -->
+<section>
+  <div class="wrap">
+    <div class="kicker">Across your whole workflow</div>
+    <h2>Where AI fits in the backend lifecycle</h2>
+    <p class="lede">AI helps at every stage, not only when you write code. Each card shows a prompt you can try.</p>
+
+    <div class="flow-rail" aria-hidden="true"></div>
+    <div class="flow">
+      <div class="stage">
+        <div class="stage-num">1</div>
+        <h3>Design</h3>
+        <ul>
+          <li>Compare architecture options</li>
+          <li>Draft ADRs and tech specs</li>
+          <li>Model schemas and APIs</li>
+          <li>List failure modes</li>
+        </ul>
+        <div class="prompt">Try:<code>"Give me 3 ways to design this, with trade-offs on consistency, cost and ops load."</code></div>
+      </div>
+      <div class="stage">
+        <div class="stage-num">2</div>
+        <h3>Build</h3>
+        <ul>
+          <li>Implement from a clear spec</li>
+          <li>Generate boilerplate</li>
+          <li>Write SQL and migrations</li>
+          <li>Integrate SDKs</li>
+        </ul>
+        <div class="prompt">Try:<code>"Implement this handler following the patterns in user_service.go."</code></div>
+      </div>
+      <div class="stage">
+        <div class="stage-num">3</div>
+        <h3>Test</h3>
+        <ul>
+          <li>Unit and table-driven tests</li>
+          <li>Find coverage gaps</li>
+          <li>Mocks and fixtures</li>
+          <li>Load test scripts</li>
+        </ul>
+        <div class="prompt">Try:<code>"Write tests for the failure paths first: timeouts, retries, partial writes."</code></div>
+      </div>
+      <div class="stage">
+        <div class="stage-num">4</div>
+        <h3>Review</h3>
+        <ul>
+          <li>First-pass code review</li>
+          <li>Race and leak analysis</li>
+          <li>Security scan</li>
+          <li>Clear PR description</li>
+        </ul>
+        <div class="prompt">Try:<code>"Review this diff for concurrency bugs and missing error handling only."</code></div>
+      </div>
+      <div class="stage">
+        <div class="stage-num">5</div>
+        <h3>Ship</h3>
+        <ul>
+          <li>CI/CD and Helm changes</li>
+          <li>Release notes</li>
+          <li>Rollout and rollback plan</li>
+          <li>Changes to K8s resources</li>
+        </ul>
+        <div class="prompt">Try:<code>"Write a rollback plan for this migration. What breaks if it half-applies?"</code></div>
+      </div>
+      <div class="stage">
+        <div class="stage-num">6</div>
+        <h3>Operate</h3>
+        <ul>
+          <li>Incident triage</li>
+          <li>Read logs and metrics</li>
+          <li>Profile CPU and memory</li>
+          <li>Cost and sizing reviews</li>
+        </ul>
+        <div class="prompt">Try:<code>"Here are the p99 latency and error logs. Is this infra or our code?"</code></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Before / After -->
+<section>
+  <div class="wrap">
+    <div class="kicker">A normal week</div>
+    <h2>Before and after</h2>
+    <p class="lede">The work doesn't go away. Your part of it moves from typing and searching to directing and checking.</p>
+
+    <div class="ba">
+      <div class="ba-row head">
+        <div class="ba-head">Task</div>
+        <div class="ba-head">Before</div>
+        <div class="ba-head">With AI</div>
+      </div>
+      <div class="ba-row">
+        <div class="ba-task">New endpoint</div>
+        <div class="ba-cell before">Copy an old handler, rename things, wire the routes, write validation by hand.</div>
+        <div class="ba-cell after">Describe the contract. AI drafts the handler, validation and tests. You review the logic.</div>
+      </div>
+      <div class="ba-row">
+        <div class="ba-task">Legacy service</div>
+        <div class="ba-cell before">Spend a day reading unfamiliar code before you can change anything safely.</div>
+        <div class="ba-cell after">Ask for a walkthrough and a diagram of the flow, then read the parts that matter.</div>
+      </div>
+      <div class="ba-row">
+        <div class="ba-task">Flaky bug</div>
+        <div class="ba-cell before">Add log lines, redeploy, wait, repeat.</div>
+        <div class="ba-cell after">Give it the traces and code. Get ranked causes and a test that reproduces the bug.</div>
+      </div>
+      <div class="ba-row">
+        <div class="ba-task">Dependency upgrade</div>
+        <div class="ba-cell before">Days of fixing each breaking change by hand, one file at a time.</div>
+        <div class="ba-cell after">AI applies the change across the repo. You check the diff and the test results.</div>
+      </div>
+      <div class="ba-row">
+        <div class="ba-task">Code review</div>
+        <div class="ba-cell before">Reviewers spend their attention on style and obvious mistakes.</div>
+        <div class="ba-cell after">AI catches those first. People review design, intent and risk.</div>
+      </div>
+      <div class="ba-row">
+        <div class="ba-task">Incident</div>
+        <div class="ba-cell before">Switch between Grafana, logs and AWS, and correlate by hand under pressure.</div>
+        <div class="ba-cell after">AI builds the timeline and a first verdict. You confirm it and decide what to do.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- The loop -->
+<section>
+  <div class="wrap">
+    <div class="kicker">How to work with it</div>
+    <h2>The senior engineer's AI loop</h2>
+    <p class="lede">Treat AI like a very fast mid-level engineer who knows almost nothing about your system. The quality of what you get back depends on the context you give it and how carefully you check it.</p>
+
+    <div class="loop-grid">
+      <svg class="loop-svg" viewBox="0 0 320 320" role="img" aria-label="A loop of four steps: Specify, Delegate, Verify, Refine">
+        <circle class="ring" cx="160" cy="160" r="110"/>
+        <!-- arcs: 4 quadrants -->
+        <path class="arc" d="M160 50 A110 110 0 0 1 270 160" style="stroke: var(--you)"/>
+        <path class="arc" d="M270 160 A110 110 0 0 1 160 270" style="stroke: var(--accent)"/>
+        <path class="arc" d="M160 270 A110 110 0 0 1 50 160" style="stroke: var(--you)"/>
+        <path class="arc" d="M50 160 A110 110 0 0 1 160 50" style="stroke: var(--quality)"/>
+        <circle class="node" cx="160" cy="50" r="30" style="stroke: var(--you)"/>
+        <circle class="node" cx="270" cy="160" r="30" style="stroke: var(--accent)"/>
+        <circle class="node" cx="160" cy="270" r="30" style="stroke: var(--you)"/>
+        <circle class="node" cx="50" cy="160" r="30" style="stroke: var(--quality)"/>
+        <text x="160" y="55" text-anchor="middle">1</text>
+        <text x="270" y="165" text-anchor="middle">2</text>
+        <text x="160" y="275" text-anchor="middle">3</text>
+        <text x="50" y="165" text-anchor="middle">4</text>
+        <text class="center-t" x="160" y="152" text-anchor="middle">YOU STAY</text>
+        <text class="center-t" x="160" y="170" text-anchor="middle">IN CONTROL</text>
+      </svg>
+
+      <div class="loop-steps">
+        <div class="loop-step">
+          <div class="dot" style="background: var(--you)">1</div>
+          <div><div class="owner" style="color: var(--you)">You</div><h3>Specify</h3><p>Give it the goal, constraints, SLOs, schema, and the files or patterns to follow. Say what "done" means.</p></div>
+        </div>
+        <div class="loop-step">
+          <div class="dot" style="background: var(--accent)">2</div>
+          <div><div class="owner" style="color: var(--accent)">AI</div><h3>Delegate</h3><p>Let it draft, search, refactor or test. Keep each task small enough that you can review the whole diff.</p></div>
+        </div>
+        <div class="loop-step">
+          <div class="dot" style="background: var(--you)">3</div>
+          <div><div class="owner" style="color: var(--you)">You</div><h3>Verify</h3><p>Run the tests, read the diff, and check it against how the real system behaves. Never merge code you don't understand.</p></div>
+        </div>
+        <div class="loop-step">
+          <div class="dot" style="background: var(--quality)">4</div>
+          <div><div class="owner" style="color: var(--quality)">Together</div><h3>Refine</h3><p>Correct it, add the context it lacked, and repeat. Save what you learn in project docs such as CLAUDE.md so the next run starts smarter.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Division of labor -->
+<section>
+  <div class="wrap">
+    <div class="kicker">Division of labor</div>
+    <h2>What to hand off, and what to keep</h2>
+    <p class="lede">Your seniority matters more with AI, not less. AI makes code cheap to produce. Judgment about which code should exist is still scarce.</p>
+
+    <div class="split">
+      <div class="split-col ai">
+        <h3>Hand to AI</h3>
+        <div class="tags">
+          <span class="tag">Boilerplate</span><span class="tag">First drafts</span><span class="tag">Test cases</span>
+          <span class="tag">Mechanical refactors</span><span class="tag">Log and trace analysis</span><span class="tag">Code search</span>
+          <span class="tag">Docs and PR text</span><span class="tag">Lint fixes</span><span class="tag">Query tuning ideas</span>
+          <span class="tag">First-pass review</span><span class="tag">Explaining unfamiliar code</span>
+        </div>
+      </div>
+      <div class="split-col you">
+        <h3>Keep for yourself</h3>
+        <div class="tags">
+          <span class="tag">Architecture decisions</span><span class="tag">Trade-off calls</span><span class="tag">Data model ownership</span>
+          <span class="tag">Security sign-off</span><span class="tag">Final review and merge</span><span class="tag">Production changes</span>
+          <span class="tag">Business context</span><span class="tag">Mentoring the team</span><span class="tag">Saying "no"</span>
+          <span class="tag">Accountability</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Prompt anatomy -->
+<section>
+  <div class="wrap">
+    <div class="kicker">Better input, better output</div>
+    <h2>How to write a good backend prompt</h2>
+    <p class="lede">Vague prompts get you generic code. Specific prompts get you code that fits your system.</p>
+
+    <div class="anatomy">
+      <div class="anatomy-line"><div class="lbl" style="color: var(--accent)">Goal</div><div class="txt">Add idempotency to <code>POST /v1/payments</code> so client retries never double-charge.</div></div>
+      <div class="anatomy-line"><div class="lbl" style="color: var(--quality)">Context</div><div class="txt">Go 1.23, Postgres, Redis available. Follow the pattern in <code>internal/orders/handler.go</code>.</div></div>
+      <div class="anatomy-line"><div class="lbl" style="color: var(--you)">Constraints</div><div class="txt">p99 &lt; 50ms added latency. No new infrastructure. Keys expire after 24h.</div></div>
+      <div class="anatomy-line"><div class="lbl" style="color: var(--warn)">Failure modes</div><div class="txt">Handle two requests with the same key at once, Redis being down, and a crash between the write and the response.</div></div>
+      <div class="anatomy-line"><div class="lbl" style="color: var(--speed)">Done means</div><div class="txt">Table-driven tests for every failure mode above, <code>go test -race</code> passes, and the PR description explains the trade-offs.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Risks -->
+<section>
+  <div class="wrap">
+    <div class="kicker">Use it safely</div>
+    <h2>Risks and how to guard against them</h2>
+    <p class="lede">AI can be confidently wrong. These guardrails keep the speed gains from turning into production incidents.</p>
+
+    <div class="risks">
+      <div class="risk">
+        <div class="r">Invented APIs</div>
+        <p>It calls library functions or config flags that don't exist, or that changed versions ago.</p>
+        <div class="fix"><b>Guard:</b> compile and test every change. Point it at your real dependency versions.</div>
+      </div>
+      <div class="risk">
+        <div class="r">Subtle concurrency bugs</div>
+        <p>Code that looks right can still race, deadlock or leak under load.</p>
+        <div class="fix"><b>Guard:</b> run <code>-race</code>, load tests, and your own review of every shared state change.</div>
+      </div>
+      <div class="risk">
+        <div class="r">Leaking secrets</div>
+        <p>Credentials, customer data or tokens pasted into prompts or committed into generated code.</p>
+        <div class="fix"><b>Guard:</b> use approved tools only, redact logs before pasting, and run secret scanning in CI.</div>
+      </div>
+      <div class="risk">
+        <div class="r">Trusting it too much</div>
+        <p>Approving large diffs because they "look fine" and the tests pass.</p>
+        <div class="fix"><b>Guard:</b> keep diffs small. If you can't explain the code, don't merge it.</div>
+      </div>
+      <div class="risk">
+        <div class="r">Inconsistent code</div>
+        <p>Each generated piece uses a different style, error pattern or logging convention.</p>
+        <div class="fix"><b>Guard:</b> write your conventions down in project docs and linters, and point AI at them.</div>
+      </div>
+      <div class="risk">
+        <div class="r">Skills getting rusty</div>
+        <p>Handing off the hard thinking, not only the typing.</p>
+        <div class="fix"><b>Guard:</b> use AI to go deeper. Ask "why", and still solve the hard parts yourself.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Checklist -->
+<section>
+  <div class="wrap">
+    <div class="kicker">Start this week</div>
+    <h2>Seven things to try first</h2>
+    <p class="lede">Choose one. Use it every day for a week, then add another.</p>
+    <ul class="checklist">
+      <li><div><b>Ask AI to review every PR before a person does.</b> <span>Focus it on races, error handling and security.</span></div></li>
+      <li><div><b>Write tests before you trust generated code.</b> <span>Let AI draft the edge cases and you check them.</span></div></li>
+      <li><div><b>Add a CLAUDE.md or similar file to each repo.</b> <span>Record conventions, build commands and gotchas once.</span></div></li>
+      <li><div><b>Use AI to learn an unfamiliar codebase.</b> <span>Ask for a walkthrough and a diagram of a request's path.</span></div></li>
+      <li><div><b>Ask for a critique of your next design doc.</b> <span>Ask what fails at 10x load or during a partial outage.</span></div></li>
+      <li><div><b>Hand off a tedious migration.</b> <span>A lint upgrade, SDK bump or API rename, done in reviewable chunks.</span></div></li>
+      <li><div><b>Use AI in your next incident.</b> <span>Give it the metrics and logs, and ask whether it's infra or code.</span></div></li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="big">AI won't replace a senior engineer. It gives you more time for the hard problems.</div>
+    <p>Specify clearly. Delegate the mechanical work. Verify everything. Keep ownership of what you ship.</p>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var btn = document.getElementById('themeBtn');
+    var root = document.documentElement;
+    try {
+      var saved = localStorage.getItem('cheatsheets-theme');
+      if (saved) root.setAttribute('data-theme', saved);
+    } catch (e) {}
+    btn.addEventListener('click', function () {
+      var current = root.getAttribute('data-theme') ||
+        (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      var next = current === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      try { localStorage.setItem('cheatsheets-theme', next); } catch (e) {}
+    });
+  })();
+</script>
+</body>
+</html>

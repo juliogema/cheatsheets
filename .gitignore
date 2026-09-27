@@ -1,0 +1,10 @@
+# Private sheets and the denylist of internal terms. Never publish these.
+private/
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+.vscode/
+.idea/
