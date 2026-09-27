@@ -4,7 +4,7 @@ Guidance for Claude Code and other LLM agents working in this repo.
 
 ## What this repo is
 
-A static site of one-page cheat sheets and infographics, mostly about using AI tools as a senior backend engineer. It is hosted on **GitHub Pages from a public repo**. There is no build step, no framework, and no package manager. Every page is a single hand-written HTML file.
+A static site of one-page cheat sheets, guides and infographics for engineers: AI tools, backend engineering, and professional skills such as reading in English as a second language. It is hosted on **GitHub Pages from a public repo**. There is no build step, no framework, and no package manager. Every page is a single hand-written HTML file.
 
 ## Layout
 

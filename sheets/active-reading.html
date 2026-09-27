@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Active Reading Guide</title>
+<meta name="description" content="How to read actively in English as a non-native speaker, to understand more now and speak and write better later.">
+<style>
+  :root {
+    --bg: #f6f5f1;
+    --surface: #ffffff;
+    --surface-2: #efede6;
+    --ink: #1c1d21;
+    --ink-2: #4a4c55;
+    --ink-3: #7a7c86;
+    --line: #dedbd1;
+    --accent: #0f8a6a;
+    --accent-soft: #dcf3ec;
+    --c-before: #2f5bea; --c-before-s: #e3e9fd;
+    --c-during: #0f8a6a; --c-during-s: #dcf3ec;
+    --c-after:  #8a4fd6; --c-after-s:  #efe5fb;
+    --c-use:    #c2571a; --c-use-s:    #fbe9dd;
+    --c-warn:   #b3261e; --c-warn-s:   #fbe3e1;
+    --c-gold:   #9a7200; --c-gold-s:   #f8efd2;
+    --hl: #fff1a8;
+    --shadow: 0 1px 2px rgba(20,20,30,.05), 0 6px 20px rgba(20,20,30,.05);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #121317; --surface: #1b1d23; --surface-2: #23262e;
+      --ink: #eceef3; --ink-2: #b4b8c4; --ink-3: #868b99; --line: #2e323c;
+      --accent: #4fd1a8; --accent-soft: #173a31;
+      --c-before: #7c9cff; --c-before-s: #232c4a;
+      --c-during: #4fd1a8; --c-during-s: #173a31;
+      --c-after:  #b995f5; --c-after-s:  #2e2445;
+      --c-use:    #f29a62; --c-use-s:    #3d2618;
+      --c-warn:   #f28b82; --c-warn-s:   #3d1f1d;
+      --c-gold:   #e7bf55; --c-gold-s:   #3a3019;
+      --hl: #5a4d12;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 6px 20px rgba(0,0,0,.25);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #121317; --surface: #1b1d23; --surface-2: #23262e;
+    --ink: #eceef3; --ink-2: #b4b8c4; --ink-3: #868b99; --line: #2e323c;
+    --accent: #4fd1a8; --accent-soft: #173a31;
+    --c-before: #7c9cff; --c-before-s: #232c4a;
+    --c-during: #4fd1a8; --c-during-s: #173a31;
+    --c-after:  #b995f5; --c-after-s:  #2e2445;
+    --c-use:    #f29a62; --c-use-s:    #3d2618;
+    --c-warn:   #f28b82; --c-warn-s:   #3d1f1d;
+    --c-gold:   #e7bf55; --c-gold-s:   #3a3019;
+    --hl: #5a4d12;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 6px 20px rgba(0,0,0,.25);
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 16px; line-height: 1.55;
+  }
+  .serif { font-family: ui-serif, Georgia, "Times New Roman", serif; }
+  code { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: .88em; background: var(--surface-2); padding: 1px 5px; border-radius: 5px; }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 0 16px; }
+  h1, h2, h3 { margin: 0; line-height: 1.15; letter-spacing: -0.01em; }
+  p { margin: 0; }
+
+  .home-link, .theme-btn {
+    position: fixed; top: 14px; z-index: 10; background: var(--surface); color: var(--ink-2);
+    border: 1px solid var(--line); border-radius: 999px; padding: 6px 12px; font: inherit; font-size: .8rem;
+    box-shadow: var(--shadow); text-decoration: none; cursor: pointer;
+  }
+  .home-link { left: 14px; }
+  .theme-btn { right: 14px; }
+  .home-link:hover, .theme-btn:hover { color: var(--ink); }
+
+  /* Hero */
+  .hero { padding: 76px 0 40px; }
+  .kicker { font-size: .74rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+  .hero h1 { font-size: clamp(2.1rem, 6vw, 3.5rem); font-weight: 800; max-width: 17ch; }
+  .hero h1 em { font-style: normal; color: var(--accent); }
+  .hero .sub { font-size: clamp(1.02rem, 2vw, 1.18rem); color: var(--ink-2); max-width: 62ch; margin-top: 16px; }
+
+  .vs { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 14px; margin-top: 32px; }
+  .vs-col { border-radius: 16px; padding: 18px 20px; }
+  .vs-col h3 { font-size: 1rem; margin-bottom: 10px; }
+  .vs-col ul { margin: 0; padding-left: 18px; display: grid; gap: 5px; font-size: .93rem; }
+  .vs-col.passive { background: var(--surface-2); color: var(--ink-2); }
+  .vs-col.passive h3 { color: var(--ink-3); }
+  .vs-col.active { background: var(--accent-soft); }
+  .vs-col.active h3 { color: var(--accent); }
+
+  section { padding: 44px 0; border-top: 1px solid var(--line); }
+  .sec-head { display: flex; gap: 12px; align-items: baseline; flex-wrap: wrap; margin-bottom: 6px; }
+  .sec-num { font-size: .75rem; font-weight: 800; color: var(--bg); background: var(--sc, var(--accent)); border-radius: 6px; padding: 2px 8px; }
+  h2 { font-size: clamp(1.45rem, 3.2vw, 1.95rem); }
+  .lede { color: var(--ink-2); max-width: 66ch; margin-bottom: 26px; }
+
+  /* Pipeline */
+  .pipe { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 0; align-items: stretch; }
+  .pipe-step {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 18px; box-shadow: var(--shadow);
+    border-top: 5px solid var(--c); position: relative; margin-right: 22px;
+  }
+  .pipe-step:last-child { margin-right: 0; }
+  .pipe-step:not(:last-child)::after {
+    content: "→"; position: absolute; right: -19px; top: 50%; transform: translateY(-50%);
+    color: var(--ink-3); font-size: 1.2rem;
+  }
+  .pipe-step .lbl { font-size: .7rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--c); }
+  .pipe-step h3 { font-size: 1.15rem; margin: 4px 0 6px; }
+  .pipe-step p { font-size: .9rem; color: var(--ink-2); }
+  .pipe-step .how { margin-top: 10px; font-size: .82rem; background: var(--cs); border-radius: 8px; padding: 8px 10px; color: var(--ink); }
+  .pipe-note { margin-top: 16px; font-size: .88rem; color: var(--ink-3); max-width: 80ch; }
+
+  /* Before / During / After */
+  .bda { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 16px; }
+  .phase { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; overflow: hidden; box-shadow: var(--shadow); display: flex; flex-direction: column; }
+  .phase-head { background: var(--cs); padding: 16px 18px; }
+  .phase-head .when { font-size: .7rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--c); }
+  .phase-head h3 { font-size: 1.3rem; margin-top: 2px; }
+  .phase-head .time { font-size: .82rem; color: var(--ink-2); }
+  .phase ol { margin: 0; padding: 16px 18px 18px 38px; display: grid; gap: 10px; font-size: .92rem; }
+  .phase ol li b { display: block; }
+  .phase ol li span { color: var(--ink-2); font-size: .88rem; }
+
+  /* Annotation */
+  .anno-grid { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 20px; align-items: start; }
+  .sample {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 22px; box-shadow: var(--shadow);
+  }
+  .sample .src { font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 10px; }
+  .sample p.serif { font-size: 1.06rem; line-height: 1.85; }
+  .chunk { background: var(--hl); border-radius: 3px; padding: 1px 2px; }
+  .unk { text-decoration: underline wavy var(--c-warn); text-underline-offset: 4px; }
+  .key { border-bottom: 2px solid var(--c-during); }
+  .mk {
+    display: inline-grid; place-items: center; min-width: 20px; height: 20px; border-radius: 6px; font-size: .72rem; font-weight: 800;
+    vertical-align: 2px; margin: 0 2px; font-family: ui-sans-serif, system-ui, sans-serif; color: var(--bg); background: var(--c, var(--ink-3));
+  }
+  .margin-notes { margin-top: 16px; border-top: 1px dashed var(--line); padding-top: 14px; display: grid; gap: 7px; font-size: .86rem; color: var(--ink-2); }
+  .margin-notes b { color: var(--ink); }
+  .legend { display: grid; gap: 8px; }
+  .lg { display: grid; grid-template-columns: 44px minmax(0,1fr); gap: 12px; align-items: center; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; }
+  .lg .sym { font-weight: 800; text-align: center; }
+  .lg b { display: block; font-size: .92rem; }
+  .lg span { font-size: .84rem; color: var(--ink-2); }
+
+  /* Vocabulary */
+  .vocab-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 18px; }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 20px; box-shadow: var(--shadow); min-width: 0; }
+  .card h3 { font-size: 1.08rem; margin-bottom: 12px; }
+  .decide { display: grid; gap: 8px; }
+  .dq { display: grid; grid-template-columns: 30px minmax(0,1fr); gap: 10px; align-items: start; font-size: .9rem; }
+  .dq .n { width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; font-weight: 800; font-size: .8rem; background: var(--c-before-s); color: var(--c-before); }
+  .dq .a { color: var(--ink-2); font-size: .86rem; display: block; }
+  .dq .yes { color: var(--c-during); font-weight: 700; }
+  .dq .no { color: var(--c-warn); font-weight: 700; }
+  .book { width: 100%; border-collapse: collapse; font-size: .86rem; table-layout: fixed; }
+  .book th { text-align: left; font-size: .7rem; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); padding: 0 8px 8px 0; font-weight: 700; }
+  .book td { padding: 9px 8px 9px 0; border-top: 1px solid var(--line); vertical-align: top; overflow-wrap: anywhere; }
+  .book td:first-child { font-weight: 700; color: var(--c-use); }
+  .chunk-types { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+  .ct { background: var(--surface-2); border-radius: 10px; padding: 8px 11px; font-size: .84rem; }
+  .ct b { display: block; font-size: .7rem; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); }
+
+  /* Comprehension */
+  .levels { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 14px; }
+  .level { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 18px; box-shadow: var(--shadow); }
+  .level .depth { display: flex; gap: 4px; margin-bottom: 10px; }
+  .level .depth i { width: 22px; height: 6px; border-radius: 3px; background: var(--surface-2); }
+  .level .depth i.on { background: var(--c-after); }
+  .level h3 { font-size: 1.05rem; margin-bottom: 4px; }
+  .level p { font-size: .88rem; color: var(--ink-2); }
+  .level .q { margin-top: 10px; font-size: .86rem; font-style: italic; color: var(--ink); }
+  .check { margin-top: 18px; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr)); gap: 10px; }
+  .check div { background: var(--c-after-s); border-radius: 12px; padding: 12px 14px; font-size: .9rem; }
+  .check div b { display: block; color: var(--c-after); font-size: .8rem; letter-spacing: .04em; text-transform: uppercase; margin-bottom: 2px; }
+
+  /* Articulation */
+  .ladder { display: grid; gap: 10px; }
+  .rung { display: grid; grid-template-columns: 56px minmax(0,1fr) minmax(0, 1.1fr); gap: 14px; align-items: center; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; box-shadow: var(--shadow); }
+  .rung .lvl { font-weight: 800; font-size: 1.4rem; color: var(--c-use); text-align: center; }
+  .rung h3 { font-size: 1rem; }
+  .rung .what { font-size: .86rem; color: var(--ink-2); }
+  .rung .ex { font-size: .86rem; background: var(--c-use-s); border-radius: 10px; padding: 9px 11px; }
+  .frames { margin-top: 22px; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 14px; }
+  .frame { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 16px; box-shadow: var(--shadow); }
+  .frame h3 { font-size: .95rem; margin-bottom: 8px; color: var(--c-use); }
+  .frame ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 6px; }
+  .frame li { font-size: .9rem; padding-left: 14px; position: relative; }
+  .frame li::before { content: "›"; position: absolute; left: 0; color: var(--c-use); font-weight: 800; }
+
+  /* Balance */
+  .balance { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 16px; }
+  .bal { border-radius: 18px; padding: 20px; }
+  .bal.ext { background: var(--c-before-s); }
+  .bal.int { background: var(--c-during-s); }
+  .bal h3 { font-size: 1.15rem; }
+  .bal .tag { font-size: .8rem; color: var(--ink-2); margin: 2px 0 12px; }
+  .bal dl { margin: 0; display: grid; grid-template-columns: 90px minmax(0,1fr); gap: 6px 12px; font-size: .88rem; }
+  .bal dt { font-weight: 700; color: var(--ink-2); }
+  .bal dd { margin: 0; }
+  .coverage { margin-top: 16px; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 18px; box-shadow: var(--shadow); }
+  .cov-bar { display: flex; height: 30px; border-radius: 8px; overflow: hidden; margin: 12px 0 8px; font-size: .74rem; font-weight: 700; }
+  .cov-bar div { display: grid; place-items: center; color: var(--bg); white-space: nowrap; overflow: hidden; }
+  .cov-labels { display: flex; justify-content: space-between; gap: 10px; font-size: .78rem; color: var(--ink-3); flex-wrap: wrap; }
+  .coverage p { font-size: .9rem; color: var(--ink-2); }
+
+  /* What to read */
+  .menu { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr)); gap: 12px; }
+  .dish { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 16px; box-shadow: var(--shadow); }
+  .dish .dt { font-size: .7rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--c); }
+  .dish h3 { font-size: 1rem; margin: 3px 0 6px; }
+  .dish p { font-size: .86rem; color: var(--ink-2); }
+
+  /* AI prompts */
+  .prompts { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); gap: 12px; }
+  .pr { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; box-shadow: var(--shadow); }
+  .pr .goal { font-size: .72rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--c-before); margin-bottom: 6px; }
+  .pr .txt { font-size: .9rem; background: var(--surface-2); border-radius: 8px; padding: 9px 11px; }
+  .ai-rule { margin-top: 16px; background: var(--c-gold-s); border-radius: 14px; padding: 14px 16px; font-size: .92rem; }
+  .ai-rule b { color: var(--c-gold); }
+
+  /* Traps */
+  .traps { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 12px; }
+  .trap { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 16px; box-shadow: var(--shadow); }
+  .trap .t { color: var(--c-warn); font-weight: 700; display: flex; gap: 8px; align-items: center; }
+  .trap .t::before { content: "✗"; width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; background: var(--c-warn-s); font-size: .78rem; flex: none; }
+  .trap p { font-size: .88rem; color: var(--ink-2); margin: 6px 0 8px; }
+  .trap .fix { font-size: .88rem; border-top: 1px dashed var(--line); padding-top: 8px; }
+  .trap .fix b { color: var(--c-during); }
+
+  /* Routine */
+  .routine { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 200px), 1fr)); gap: 10px; }
+  .slot { background: var(--surface); border: 1px solid var(--line); border-top: 4px solid var(--c); border-radius: 14px; padding: 14px; box-shadow: var(--shadow); }
+  .slot .min { font-size: 1.5rem; font-weight: 800; color: var(--c); line-height: 1; }
+  .slot .min small { font-size: .8rem; font-weight: 600; color: var(--ink-3); }
+  .slot h3 { font-size: .98rem; margin: 6px 0 4px; }
+  .slot p { font-size: .84rem; color: var(--ink-2); }
+  .week { margin-top: 16px; display: grid; grid-template-columns: repeat(7, minmax(0,1fr)); gap: 6px; }
+  .day { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 10px 8px; text-align: center; font-size: .78rem; }
+  .day b { display: block; font-size: .72rem; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 4px; }
+  .day.int { background: var(--c-during-s); border-color: transparent; }
+  .day.out { background: var(--c-use-s); border-color: transparent; }
+  .day.ext { background: var(--c-before-s); border-color: transparent; }
+  .week-legend { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 10px; font-size: .8rem; color: var(--ink-2); }
+  .week-legend span { display: inline-flex; gap: 6px; align-items: center; }
+  .week-legend i { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+
+  /* Bookmark */
+  .bookmark {
+    border: 2px dashed var(--line); border-radius: 18px; padding: 20px; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 230px), 1fr)); gap: 16px;
+    background: var(--surface);
+  }
+  .bookmark h3 { font-size: .8rem; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+  .bookmark ul { margin: 0; padding-left: 16px; font-size: .88rem; display: grid; gap: 3px; }
+
+  footer { padding: 34px 0 60px; border-top: 1px solid var(--line); color: var(--ink-3); font-size: .85rem; }
+  footer .big { font-size: clamp(1.2rem, 3vw, 1.55rem); color: var(--ink); font-weight: 800; margin-bottom: 8px; max-width: 34ch; }
+  footer p + p { margin-top: 6px; }
+
+  @media (max-width: 900px) {
+    .pipe { grid-template-columns: repeat(2, minmax(0,1fr)); gap: 16px; }
+    .pipe-step { margin-right: 0; }
+    .pipe-step::after { display: none; }
+    .bda, .levels { grid-template-columns: minmax(0,1fr); }
+    .anno-grid, .vocab-grid { grid-template-columns: minmax(0,1fr); }
+    .rung { grid-template-columns: 44px minmax(0,1fr); }
+    .rung .ex { grid-column: 1 / -1; }
+  }
+  @media (max-width: 640px) {
+    .vs, .pipe, .balance { grid-template-columns: minmax(0,1fr); }
+    .week { grid-template-columns: repeat(4, minmax(0,1fr)); }
+    .bal dl { grid-template-columns: minmax(0,1fr); gap: 0 0; }
+    .bal dd { margin-bottom: 8px; }
+    .book th:nth-child(2), .book td:nth-child(2) { display: none; }
+  }
+  @media print {
+    .home-link, .theme-btn { display: none; }
+    body { background: #fff; }
+    section { break-inside: auto; }
+    .card, .phase, .level, .trap, .slot, .pr, .dish, .frame, .rung, .bookmark { break-inside: avoid; box-shadow: none; }
+  }
+</style>
+</head>
+<body>
+<a class="home-link" href="../index.html">← All sheets</a>
+<button class="theme-btn" id="themeBtn" type="button" aria-label="Toggle light or dark theme">◐ Theme</button>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">Guide · English as a second language</div>
+    <h1>Read <em>actively</em>. Understand more. Speak better.</h1>
+    <p class="sub">Passive reading means letting the words pass by. Active reading means working with the text: asking questions, noticing how English expresses ideas, and then using those expressions yourself. For a non-native speaker, it helps you understand more today and speak and write better later.</p>
+
+    <div class="vs">
+      <div class="vs-col passive">
+        <h3>Passive reading</h3>
+        <ul>
+          <li>Eyes move, mind wanders</li>
+          <li>Translates word by word in your head</li>
+          <li>Looks up every unknown word</li>
+          <li>Highlights half the page</li>
+          <li>Finishes and remembers little</li>
+          <li>Never uses the new language</li>
+        </ul>
+      </div>
+      <div class="vs-col active">
+        <h3>Active reading</h3>
+        <ul>
+          <li>Reads with a question in mind</li>
+          <li>Reads in phrases and ideas</li>
+          <li>Guesses from context first</li>
+          <li>Marks only what matters, with a code</li>
+          <li>Summarizes in your own words</li>
+          <li>Steals useful phrases and uses them</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+<!-- 1. Pipeline -->
+<section style="--sc:var(--accent)">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">01</span><h2>From reading to speaking</h2></div>
+    <p class="lede">Reading well doesn't automatically make you speak well. You get there in four stages, and each one needs a small, deliberate action.</p>
+    <div class="pipe">
+      <div class="pipe-step" style="--c:var(--c-before); --cs:var(--c-before-s)">
+        <div class="lbl">Stage 1</div><h3>Understand</h3>
+        <p>Follow the main idea and the argument, not every word.</p>
+        <div class="how"><b>Do:</b> preview first, read with a question, and guess from context.</div>
+      </div>
+      <div class="pipe-step" style="--c:var(--c-during); --cs:var(--c-during-s)">
+        <div class="lbl">Stage 2</div><h3>Notice</h3>
+        <p>See <em>how</em> English says it: word partners, sentence patterns, linking words.</p>
+        <div class="how"><b>Do:</b> mark 3–5 useful phrases in each text you read.</div>
+      </div>
+      <div class="pipe-step" style="--c:var(--c-after); --cs:var(--c-after-s)">
+        <div class="lbl">Stage 3</div><h3>Remember</h3>
+        <p>Keep the phrases long enough that they become yours.</p>
+        <div class="how"><b>Do:</b> keep a phrasebook and review it with spaced repetition.</div>
+      </div>
+      <div class="pipe-step" style="--c:var(--c-use); --cs:var(--c-use-s)">
+        <div class="lbl">Stage 4</div><h3>Use</h3>
+        <p>Say and write the phrases in your own sentences.</p>
+        <div class="how"><b>Do:</b> retell the text aloud, and write a short paragraph using the new phrases.</div>
+      </div>
+    </div>
+    <p class="pipe-note">These stages follow well-known ideas from language-learning research. You learn from input you can mostly understand (Krashen). You learn what you consciously <em>notice</em> (Schmidt). And trying to speak or write shows you the gaps in what you know (Swain).</p>
+  </div>
+</section>
+
+<!-- 2. Before / During / After -->
+<section style="--sc:var(--c-before)">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">02</span><h2>Before, during, after</h2></div>
+    <p class="lede">A simple routine for any text: an article, a design doc, a book chapter. It's based on the classic SQ3R method (Survey, Question, Read, Recite, Review), adapted for reading in a second language.</p>
+    <div class="bda">
+      <div class="phase" style="--c:var(--c-before); --cs:var(--c-before-s)">
+        <div class="phase-head"><div class="when">Before</div><h3>Preview</h3><div class="time">1–3 minutes</div></div>
+        <ol>
+          <li><b>Skim the structure</b><span>Title, headings, first and last paragraphs, bold words, images.</span></li>
+          <li><b>Predict</b><span>"I think this is about… and the author will probably argue…"</span></li>
+          <li><b>Ask 1–3 questions</b><span>Write them down. Now you read to answer them.</span></li>
+          <li><b>Activate what you know</b><span>What do you already know about the topic? Known context makes new words easier.</span></li>
+        </ol>
+      </div>
+      <div class="phase" style="--c:var(--c-during); --cs:var(--c-during-s)">
+        <div class="phase-head"><div class="when">During</div><h3>Engage</h3><div class="time">Most of your time</div></div>
+        <ol>
+          <li><b>Read in chunks, not words</b><span>Move your eyes phrase by phrase: "in order to / reduce the risk / of downtime".</span></li>
+          <li><b>Guess, then continue</b><span>Unknown word? Guess from context and keep reading. Check it later.</span></li>
+          <li><b>Mark with a code</b><span>Use a few symbols (see section 03), not a highlighter on everything.</span></li>
+          <li><b>Pause at each section</b><span>Ask yourself: "What did this part say?" Answer in one sentence.</span></li>
+          <li><b>Watch the linking words</b><span><em>However, therefore, despite, as a result</em>: they show the logic.</span></li>
+        </ol>
+      </div>
+      <div class="phase" style="--c:var(--c-after); --cs:var(--c-after-s)">
+        <div class="phase-head"><div class="when">After</div><h3>Process</h3><div class="time">5–10 minutes</div></div>
+        <ol>
+          <li><b>Summarize from memory</b><span>Close the text. Write or say the main idea in 1–3 sentences.</span></li>
+          <li><b>Answer your questions</b><span>The ones you wrote before reading. What's still unclear?</span></li>
+          <li><b>Check your guesses</b><span>Look up the words you marked. Were you right?</span></li>
+          <li><b>Save 3–5 phrases</b><span>Add them to your phrasebook with the original sentence.</span></li>
+          <li><b>React</b><span>Do you agree? What would you ask the author?</span></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. Annotation -->
+<section style="--sc:var(--c-during)">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">03</span><h2>Mark the text with a code</h2></div>
+    <p class="lede">Use a small set of symbols so every mark means something. Here is an example paragraph marked up.</p>
+    <div class="anno-grid">
+      <div class="sample">
+        <div class="src">Example · a paragraph from an engineering blog (written for this guide)</div>
+        <p class="serif">
+          <span class="key">The team decided to <span class="chunk">roll out</span> the new cache <span class="chunk">gradually</span></span><span class="mk" style="--c:var(--c-during)">★</span>
+          rather than all at once. <span class="chunk">In hindsight</span>, this turned out to be the right call:
+          a subtle bug only <span class="unk">surfaced</span><span class="mk" style="--c:var(--c-warn)">~</span> under heavy load,
+          and because only five percent of traffic was affected, they could
+          <span class="chunk">roll back</span> within minutes. <span class="chunk">That said</span>, the slower rollout
+          <span class="chunk">came at a cost</span><span class="mk" style="--c:var(--c-use)">[ ]</span>: the migration took three weeks instead of one.
+          <span class="mk" style="--c:var(--c-after)">?</span>
+        </p>
+        <div class="margin-notes">
+          <div><span class="mk" style="--c:var(--c-during)">★</span> <b>Main idea:</b> a gradual rollout made the bug cheap to fix.</div>
+          <div><span class="mk" style="--c:var(--c-warn)">~</span> <b>"surfaced"</b>: my guess from context is "appeared". Check later.</div>
+          <div><span class="mk" style="--c:var(--c-use)">[ ]</span> <b>Steal:</b> "came at a cost", "in hindsight", "that said".</div>
+          <div><span class="mk" style="--c:var(--c-after)">?</span> <b>Question:</b> was three weeks worth it? What would I choose?</div>
+        </div>
+      </div>
+      <div class="legend">
+        <div class="lg"><div class="sym"><span class="mk" style="--c:var(--c-during)">★</span></div><div><b>Main idea</b><span>At most one or two per section. If everything is starred, nothing is.</span></div></div>
+        <div class="lg"><div class="sym"><span class="mk" style="--c:var(--c-warn)">~</span></div><div><b>Unknown word: guess</b><span>Underline it, write your guess, and keep reading.</span></div></div>
+        <div class="lg"><div class="sym"><span class="mk" style="--c:var(--c-use)">[ ]</span></div><div><b>Phrase to steal</b><span>A useful expression you want to use yourself.</span></div></div>
+        <div class="lg"><div class="sym"><span class="mk" style="--c:var(--c-after)">?</span></div><div><b>Question or confusion</b><span>Something you don't understand, or doubt.</span></div></div>
+        <div class="lg"><div class="sym"><span class="mk" style="--c:var(--c-before)">↔</span></div><div><b>Connection</b><span>Links to something you know, or another part of the text.</span></div></div>
+        <div class="lg"><div class="sym"><span class="mk" style="--c:var(--ink-3)">!</span></div><div><b>Surprise or disagreement</b><span>A strong reaction. These make good discussion points.</span></div></div>
+        <div class="lg"><div class="sym"><span class="chunk" style="font-size:.8rem">abc</span></div><div><b>Highlight = chunk</b><span>Highlight word groups ("roll back"), not single words.</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. Vocabulary -->
+<section style="--sc:var(--c-use)">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">04</span><h2>Unknown words and useful phrases</h2></div>
+    <p class="lede">Two skills: deciding which words deserve your time, and saving phrases (chunks) rather than isolated words. Fluent speakers don't build sentences word by word. They use ready-made chunks.</p>
+    <div class="vocab-grid">
+      <div class="card">
+        <h3>Should I look this word up?</h3>
+        <div class="decide">
+          <div class="dq"><span class="n">1</span><div>Can I understand the sentence without it?<span class="a"><span class="yes">Yes</span> → skip it for now. <span class="no">No</span> → go to 2.</span></div></div>
+          <div class="dq"><span class="n">2</span><div>Can I guess it from context, word parts or the next sentence?<span class="a"><span class="yes">Yes</span> → write your guess and continue. <span class="no">No</span> → go to 3.</span></div></div>
+          <div class="dq"><span class="n">3</span><div>Does it appear more than once, or in a heading?<span class="a"><span class="yes">Yes</span> → look it up now. It matters. <span class="no">No</span> → mark it and check it after reading.</span></div></div>
+          <div class="dq"><span class="n">4</span><div>After reading: is it common and useful for me?<span class="a"><span class="yes">Yes</span> → add it to your phrasebook. <span class="no">No</span> → let it go.</span></div></div>
+        </div>
+        <div class="chunk-types">
+          <div class="ct"><b>Guess from</b>the words around it</div>
+          <div class="ct"><b>Guess from</b>word parts: <em>un-</em>, <em>re-</em>, <em>-able</em></div>
+          <div class="ct"><b>Guess from</b>an example or contrast nearby</div>
+          <div class="ct"><b>Dictionary</b>use an English–English learner's dictionary</div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Your phrasebook: three columns</h3>
+        <table class="book">
+          <thead><tr><th style="width:28%">Phrase</th><th style="width:36%">Original sentence</th><th>My own sentence</th></tr></thead>
+          <tbody>
+            <tr><td>came at a cost</td><td>The slower rollout came at a cost.</td><td>Adding more replicas came at a cost: our bill doubled.</td></tr>
+            <tr><td>in hindsight</td><td>In hindsight, this was the right call.</td><td>In hindsight, we should have added an index first.</td></tr>
+            <tr><td>raise a concern</td><td>She raised a concern about latency.</td><td>I want to raise a concern about the retry logic.</td></tr>
+            <tr><td>that said</td><td>That said, it took three weeks.</td><td>The design is clean. That said, it's hard to test.</td></tr>
+          </tbody>
+        </table>
+        <div class="chunk-types">
+          <div class="ct"><b>Collocation</b>make a decision · heavy traffic</div>
+          <div class="ct"><b>Phrasal verb</b>roll out · look into · set up</div>
+          <div class="ct"><b>Linker</b>that said · as a result · even so</div>
+          <div class="ct"><b>Sentence frame</b>The main reason is that…</div>
+        </div>
+        <p style="font-size:.86rem; color:var(--ink-2); margin-top:12px">The <b>"my own sentence"</b> column matters most. That's where reading becomes speaking. Review the phrasebook with spaced repetition, for example flashcards in Anki, with the phrase on one side and your sentence on the other.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. Comprehension -->
+<section style="--sc:var(--c-after)">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">05</span><h2>Choose your reading depth</h2></div>
+    <p class="lede">Not every text needs close reading. Choose the depth for your goal, and check your understanding afterwards.</p>
+    <div class="levels">
+      <div class="level"><div class="depth"><i class="on"></i><i></i><i></i></div><h3>Skim</h3><p>Read quickly for the main idea. Headings, first sentences, conclusion.</p><div class="q">"Is this worth reading closely?"</div></div>
+      <div class="level"><div class="depth"><i class="on"></i><i class="on"></i><i></i></div><h3>Scan</h3><p>Look for one specific thing: a name, a number, a config flag.</p><div class="q">"Where does it say the default timeout?"</div></div>
+      <div class="level"><div class="depth"><i class="on"></i><i class="on"></i><i class="on"></i></div><h3>Close read</h3><p>Read slowly, with marks, questions and a summary afterwards. Use this for texts you'll learn from.</p><div class="q">"What is the argument, and do I agree?"</div></div>
+    </div>
+    <div class="check">
+      <div><b>One-sentence test</b>Can you state the main idea in one sentence without looking?</div>
+      <div><b>Explain it simply</b>Explain it to a colleague (or a rubber duck) in simple words. If you get stuck, you've found the gap.</div>
+      <div><b>Why and how</b>Can you say <em>why</em> the author believes it, not only <em>what</em> they say?</div>
+      <div><b>Paraphrase</b>Rewrite one key sentence in different words. Keep the meaning, change the form.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. Articulation -->
+<section style="--sc:var(--c-use)">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">06</span><h2>Turn reading into speaking and writing</h2></div>
+    <p class="lede">Climb this ladder. Each step asks a little more of you. Start at the bottom, and add a new step when the current one feels easy.</p>
+    <div class="ladder">
+      <div class="rung"><div class="lvl">1</div><div><h3>Read aloud</h3><div class="what">Read one paragraph aloud slowly, in phrase groups. It trains rhythm, stress and pronunciation.</div></div><div class="ex">Pause at commas and linking words. Stress the key words: "It came at a <b>cost</b>."</div></div>
+      <div class="rung"><div class="lvl">2</div><div><h3>Shadowing</h3><div class="what">Play audio (an audiobook, a talk with a transcript) and speak along a fraction of a second behind.</div></div><div class="ex">Conference talks with transcripts work well. Choose 1–2 minutes and repeat 3 times.</div></div>
+      <div class="rung"><div class="lvl">3</div><div><h3>Retell</h3><div class="what">Close the text and retell it aloud in 60 seconds. Record yourself.</div></div><div class="ex">"The article is about… The main point is… One example they give is…"</div></div>
+      <div class="rung"><div class="lvl">4</div><div><h3>Use 3 phrases</h3><div class="what">Write a short paragraph, on any topic, using three phrases from today's reading.</div></div><div class="ex">A Slack message, a PR description, or a short journal entry all count.</div></div>
+      <div class="rung"><div class="lvl">5</div><div><h3>Respond</h3><div class="what">Give your opinion: agree, disagree, add an example from your own work.</div></div><div class="ex">"I partly agree. In my experience, gradual rollouts also…"</div></div>
+      <div class="rung"><div class="lvl">6</div><div><h3>Discuss or teach</h3><div class="what">Talk about it with someone: a colleague, a study partner, or an AI voice chat.</div></div><div class="ex">Share an article with your team and explain in two sentences why it's worth reading.</div></div>
+    </div>
+
+    <div class="frames">
+      <div class="frame"><h3>Summarizing</h3><ul>
+        <li>The article is mainly about…</li>
+        <li>The author argues that…</li>
+        <li>The key point is that…</li>
+        <li>In short, …</li>
+      </ul></div>
+      <div class="frame"><h3>Giving an opinion</h3><ul>
+        <li>What I found convincing was…</li>
+        <li>I'm not sure I agree, because…</li>
+        <li>That makes sense, but what about…?</li>
+        <li>It depends on…</li>
+      </ul></div>
+      <div class="frame"><h3>Connecting to experience</h3><ul>
+        <li>This reminds me of when we…</li>
+        <li>In my experience, …</li>
+        <li>We ran into the same problem with…</li>
+        <li>This would apply to our case if…</li>
+      </ul></div>
+      <div class="frame"><h3>Asking for clarity</h3><ul>
+        <li>What do you mean by…?</li>
+        <li>Could you give an example of…?</li>
+        <li>So, if I understand correctly, …</li>
+        <li>How does that work when…?</li>
+      </ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- 7. Balance -->
+<section style="--sc:var(--c-before)">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">07</span><h2>Balance easy and hard reading</h2></div>
+    <p class="lede">You need two kinds of reading. Most people only do the hard kind, get tired, and stop.</p>
+    <div class="balance">
+      <div class="bal ext">
+        <h3>Extensive reading</h3><div class="tag">Read a lot of easy material, for fluency and enjoyment</div>
+        <dl>
+          <dt>Difficulty</dt><dd>Easy. You know almost every word.</dd>
+          <dt>Speed</dt><dd>Fast, with no dictionary.</dd>
+          <dt>Goal</dt><dd>Reading speed, automatic understanding, seeing words in many contexts.</dd>
+          <dt>Examples</dt><dd>Novels you enjoy, blogs, news, graded readers.</dd>
+          <dt>How often</dt><dd>Most days. Enjoying it matters more than working hard at it.</dd>
+        </dl>
+      </div>
+      <div class="bal int">
+        <h3>Intensive reading</h3><div class="tag">Study a short, harder text in depth</div>
+        <dl>
+          <dt>Difficulty</dt><dd>A bit hard, with some new words and structures.</dd>
+          <dt>Speed</dt><dd>Slow. Mark it up and reread it.</dd>
+          <dt>Goal</dt><dd>Notice language, collect phrases, practice for speaking.</dd>
+          <dt>Examples</dt><dd>One article section, a design doc, a well-written postmortem.</dd>
+          <dt>How often</dt><dd>A few short sessions a week, using the full routine above.</dd>
+        </dl>
+      </div>
+    </div>
+    <div class="coverage">
+      <h3 style="font-size:1rem">How hard should the text be? Count unknown words.</h3>
+      <div class="cov-bar" role="img" aria-label="Scale of unknown words per 100: 0 to 2 is comfortable for extensive reading, 2 to 5 is good for intensive study, more than 5 is too hard for now">
+        <div style="flex:2; background:var(--c-before)">0–2 / 100</div>
+        <div style="flex:3; background:var(--c-during)">2–5 / 100</div>
+        <div style="flex:5; background:var(--c-warn)">5+ / 100</div>
+      </div>
+      <div class="cov-labels"><span>Comfortable: extensive reading</span><span>Good for intensive study</span><span>Too hard for now: choose an easier text</span></div>
+      <p style="margin-top:10px">Research on second-language reading (e.g. Hu &amp; Nation, 2000; Laufer) suggests readers need to know roughly 95–98% of the words to understand a text well without help. Quick test: count the unknown words in a 100-word paragraph.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 8. What to read -->
+<section style="--sc:var(--c-during)">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">08</span><h2>What to read, as an engineer</h2></div>
+    <p class="lede">Mix work texts, where you already know the context, with general texts that build everyday and conversational English.</p>
+    <div class="menu">
+      <div class="dish" style="--c:var(--c-during)"><div class="dt">Easy start</div><h3>Documentation you use</h3><p>You know the concepts, so the English is easier to follow. Notice how good docs phrase instructions and warnings.</p></div>
+      <div class="dish" style="--c:var(--c-during)"><div class="dt">High value</div><h3>Engineering blogs and postmortems</h3><p>Clear storytelling: problem → cause → fix → lessons. Good language to reuse for incident reports and design docs.</p></div>
+      <div class="dish" style="--c:var(--c-before)"><div class="dt">Argument</div><h3>Design docs and RFCs</h3><p>Great for the language of trade-offs: "we considered…", "the downside is…", "we chose X because…".</p></div>
+      <div class="dish" style="--c:var(--c-after)"><div class="dt">Conversation</div><h3>Essays and opinion pieces</h3><p>They teach how to state and defend a view. Good for meetings and discussions.</p></div>
+      <div class="dish" style="--c:var(--c-use)"><div class="dt">Fluency</div><h3>Fiction and memoirs</h3><p>Everyday, emotional and descriptive English you don't meet in technical writing. Read for fun.</p></div>
+      <div class="dish" style="--c:var(--c-gold)"><div class="dt">Listening bridge</div><h3>Talks with transcripts</h3><p>Read the transcript, then listen, then shadow. This connects written and spoken English.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 9. AI -->
+<section style="--sc:var(--c-gold)">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">09</span><h2>Use AI as a reading coach</h2></div>
+    <p class="lede">AI is a patient tutor that's always available. Use it to check and deepen your own work, not to replace it.</p>
+    <div class="prompts">
+      <div class="pr"><div class="goal">Understand a hard sentence</div><div class="txt">"Explain this sentence in simpler English, then explain its grammar: '…'"</div></div>
+      <div class="pr"><div class="goal">Check your summary</div><div class="txt">"Here's the article and my 3-sentence summary. What did I miss or get wrong? Correct my English and explain each correction."</div></div>
+      <div class="pr"><div class="goal">Quiz yourself</div><div class="txt">"Ask me 5 questions about this text, one at a time. Wait for my answer before the next one."</div></div>
+      <div class="pr"><div class="goal">Learn a phrase deeply</div><div class="txt">"Give me 3 natural example sentences with 'that said', and tell me when it sounds too formal."</div></div>
+      <div class="pr"><div class="goal">Improve your own sentence</div><div class="txt">"Is this natural English? 'In hindsight, we should add an index first.' Give the most natural version and explain the difference."</div></div>
+      <div class="pr"><div class="goal">Practice speaking</div><div class="txt">"In voice mode, discuss this article with me. Push back on my opinions and correct only my biggest mistakes."</div></div>
+      <div class="pr"><div class="goal">Pick the right level</div><div class="txt">"Rewrite this paragraph at an easier level. Keep the key phrases so I can compare the two versions."</div></div>
+      <div class="pr"><div class="goal">Build flashcards</div><div class="txt">"From my phrasebook below, make Anki cards: phrase on the front, a gap-fill sentence on the back."</div></div>
+    </div>
+    <div class="ai-rule"><b>Rule:</b> Try first, then ask AI. Summarize before asking for a summary. Guess the word before asking for its meaning. If AI does the thinking for you, you don't learn.</div>
+  </div>
+</section>
+
+<!-- 10. Traps -->
+<section style="--sc:var(--c-warn)">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">10</span><h2>Common traps</h2></div>
+    <p class="lede">These habits feel productive, but they slow your progress.</p>
+    <div class="traps">
+      <div class="trap"><div class="t">Translating word by word</div><p>You understand each word, but lose the meaning of the sentence.</p><div class="fix"><b>Instead:</b> read in chunks and think in ideas. Translate a whole sentence only when you're stuck.</div></div>
+      <div class="trap"><div class="t">Looking up every word</div><p>Constant interruptions break your flow and you lose the thread.</p><div class="fix"><b>Instead:</b> use the four questions in section 04. Look up words after reading.</div></div>
+      <div class="trap"><div class="t">Highlighting everything</div><p>It feels like work, but choosing what matters is the actual learning.</p><div class="fix"><b>Instead:</b> use the symbol code, with at most one or two ★ per section.</div></div>
+      <div class="trap"><div class="t">Rereading instead of recalling</div><p>Rereading feels familiar, and that feels like learning, but it isn't.</p><div class="fix"><b>Instead:</b> close the text and summarize from memory.</div></div>
+      <div class="trap"><div class="t">Only reading hard texts</div><p>It's exhausting, progress is slow, and you quit.</p><div class="fix"><b>Instead:</b> do mostly easy extensive reading, plus short intensive sessions.</div></div>
+      <div class="trap"><div class="t">Collecting without using</div><p>A list of 500 words you never use in speech.</p><div class="fix"><b>Instead:</b> collect fewer phrases, and use each one in your own sentence within 48 hours.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 11. Routine -->
+<section style="--sc:var(--accent)">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">11</span><h2>A 25-minute daily routine</h2></div>
+    <p class="lede">Doing a little every day beats doing a lot once in a while. This is a suggested starting plan. Adjust the times to fit your life.</p>
+    <div class="routine">
+      <div class="slot" style="--c:var(--c-before)"><div class="min">2 <small>min</small></div><h3>Preview</h3><p>Skim the text, predict, and write one question.</p></div>
+      <div class="slot" style="--c:var(--c-during)"><div class="min">12 <small>min</small></div><h3>Read and mark</h3><p>Read a short text or one section. Use the symbol code.</p></div>
+      <div class="slot" style="--c:var(--c-after)"><div class="min">3 <small>min</small></div><h3>Summarize</h3><p>Write or say 1–3 sentences from memory.</p></div>
+      <div class="slot" style="--c:var(--c-use)"><div class="min">5 <small>min</small></div><h3>Phrasebook</h3><p>Save 3 phrases and write your own sentence for each.</p></div>
+      <div class="slot" style="--c:var(--c-gold)"><div class="min">3 <small>min</small></div><h3>Say it</h3><p>Read one paragraph aloud, or retell the text in 60 seconds.</p></div>
+    </div>
+    <h3 style="margin-top:24px; font-size:1rem">A sample week</h3>
+    <div class="week" role="list" aria-label="Sample weekly plan">
+      <div class="day int" role="listitem"><b>Mon</b>Intensive: work article</div>
+      <div class="day ext" role="listitem"><b>Tue</b>Extensive: 20 min fun reading</div>
+      <div class="day int" role="listitem"><b>Wed</b>Intensive: design doc or RFC</div>
+      <div class="day ext" role="listitem"><b>Thu</b>Extensive: fiction or news</div>
+      <div class="day int" role="listitem"><b>Fri</b>Intensive: postmortem</div>
+      <div class="day out" role="listitem"><b>Sat</b>Output: write a short post with 5 phrases from the week</div>
+      <div class="day out" role="listitem"><b>Sun</b>Review phrasebook and shadow one talk</div>
+    </div>
+    <div class="week-legend">
+      <span><i style="background:var(--c-during-s); border:1px solid var(--c-during)"></i>Intensive</span>
+      <span><i style="background:var(--c-before-s); border:1px solid var(--c-before)"></i>Extensive</span>
+      <span><i style="background:var(--c-use-s); border:1px solid var(--c-use)"></i>Output and review</span>
+    </div>
+  </div>
+</section>
+
+<!-- 12. Bookmark -->
+<section style="--sc:var(--accent)">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">12</span><h2>Printable bookmark</h2></div>
+    <p class="lede">Screenshot or print this section and keep it next to you while you read.</p>
+    <div class="bookmark">
+      <div><h3>Before</h3><ul><li>Skim the headings</li><li>Predict the topic</li><li>Write 1–3 questions</li></ul></div>
+      <div><h3>During</h3><ul><li>Read in chunks</li><li>Guess, then continue</li><li>★ ~ [ ] ? ↔ !</li><li>Pause and summarize each section</li></ul></div>
+      <div><h3>After</h3><ul><li>Summarize from memory</li><li>Check your guesses</li><li>Save 3–5 phrases</li><li>Your own sentence for each</li></ul></div>
+      <div><h3>Use it</h3><ul><li>Read one paragraph aloud</li><li>Retell in 60 seconds</li><li>Use 3 phrases today</li><li>Share one idea with someone</li></ul></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="big">Reading is input. Active reading turns it into language you can use.</div>
+    <p>Understand → Notice → Remember → Use. Do a little every day.</p>
+    <p>Background ideas: Krashen's input hypothesis, Schmidt's noticing hypothesis, Swain's output hypothesis, Robinson's SQ3R method, and vocabulary coverage research by Hu &amp; Nation (2000) and Laufer. September 2026.</p>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var root = document.documentElement, btn = document.getElementById('themeBtn');
+    try { var t = localStorage.getItem('cheatsheets-theme'); if (t) root.setAttribute('data-theme', t); } catch (e) {}
+    btn.addEventListener('click', function () {
+      var cur = root.getAttribute('data-theme') ||
+        (window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      var next = cur === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      try { localStorage.setItem('cheatsheets-theme', next); } catch (e) {}
+    });
+  })();
+</script>
+</body>
+</html>

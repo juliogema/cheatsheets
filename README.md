@@ -1,6 +1,6 @@
 # Engineering Cheat Sheets
 
-One-page cheat sheets and infographics about working with AI as a backend engineer. Each sheet is a single, self-contained HTML file. Sheets work offline, print cleanly, work on phone screens, and support light and dark mode.
+One-page cheat sheets, guides and infographics for engineers: working with AI, backend engineering, and professional skills such as reading and communicating in English. Each sheet is a single, self-contained HTML file. Sheets work offline, print cleanly, work on phone screens, and support light and dark mode.
 
 **Live site:** `https://<your-username>.github.io/<repo-name>/`. Replace this with your URL after the first deploy.
 
@@ -8,6 +8,7 @@ One-page cheat sheets and infographics about working with AI as a backend engine
 
 | Sheet | Type | What it covers |
 |---|---|---|
+| [Active reading in a second language](sheets/active-reading.html) | Guide | A reading routine, a marking code, handling unknown words, a phrasebook method, and turning reading into speaking and writing, for non-native English speakers |
 | [Claude Code: every tool and when to use it](sheets/claude-code-cheat-sheet.html) | Cheat sheet | Surfaces, models and effort, permission modes, context control, skills, hooks, MCP, parallel and background work, review commands, principles, workflow recipes |
 | [How AI helps a senior backend engineer](sheets/ai-for-senior-backend-engineers.html) | Infographic | Productivity and quality gains across the backend lifecycle, the specify–delegate–verify loop, what to delegate and what to keep, risks and guardrails |
 
